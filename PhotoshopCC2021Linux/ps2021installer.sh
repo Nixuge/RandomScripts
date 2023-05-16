@@ -1,18 +1,12 @@
 #!/bin/bash
-# all taken from https://github.com/LinSoftWin/Photoshop-CC2022-Linux
-# remplaced parts: 
-# - removed all "rms"
-# - removed all downloads, get manually for more accuracy
-#ADDITIONAL IMPORTANT INFO:
-# - Install the SAMBA Package
-# - The launch script is located in <install dir>/Adobe-Photoshop/drive_c/launcher.sh
-# once installed go to preferences>performances and disable gpu accel, it'll still be smooth even with that off
+
 mkdir $1/Adobe-Photoshop
+
 
 #wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
 chmod +x winetricks
 
-WINEPREFIX=$1/Adobe-Photoshop wineboot
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wineboot
 
 rm -rf $1/progress.mimifile
 touch $1/progress.mimifile
@@ -56,17 +50,17 @@ touch $1/progress.mimifile
 echo "80" >> $1/progress.mimifile
 
 
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2010/vcredist_x64.exe /q /norestart
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2010/vcredist_x86.exe /q /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2010/vcredist_x64.exe /q /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2010/vcredist_x86.exe /q /norestart
 
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2012/vcredist_x86.exe /install /quiet /norestart
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2012/vcredist_x64.exe /install /quiet /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2012/vcredist_x86.exe /install /quiet /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2012/vcredist_x64.exe /install /quiet /norestart
 
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2013/vcredist_x86.exe /install /quiet /norestart
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2013/vcredist_x64.exe /install /quiet /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2013/vcredist_x86.exe /install /quiet /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2013/vcredist_x64.exe /install /quiet /norestart
 
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2019/VC_redist.x64.exe /install /quiet /norestart
-WINEPREFIX=$1/Adobe-Photoshop wine allredist/redist/2019/VC_redist.x86.exe /install /quiet /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2019/VC_redist.x64.exe /install /quiet /norestart
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/wine allredist/redist/2019/VC_redist.x86.exe /install /quiet /norestart
 
 
 rm -rf $1/progress.mimifile
@@ -83,13 +77,13 @@ echo 'SCR_PATH="pspath"' >> $1/Adobe-Photoshop/drive_c/launcher.sh
 echo 'CACHE_PATH="pscache"' >> $1/Adobe-Photoshop/drive_c/launcher.sh
 echo 'RESOURCES_PATH="$SCR_PATH/resources"' >> $1/Adobe-Photoshop/drive_c/launcher.sh
 echo 'WINE_PREFIX="$SCR_PATH/prefix"' >> $1/Adobe-Photoshop/drive_c/launcher.sh
-echo 'FILE_PATH=$(winepath -w "$1")' >> $1/Adobe-Photoshop/drive_c/launcher.sh
+echo 'FILE_PATH=$(/home/nix/ps/usr/bin/winepath -w "$1")' >> $1/Adobe-Photoshop/drive_c/launcher.sh
 echo 'export WINEPREFIX="'$1'/Adobe-Photoshop"' >> $1/Adobe-Photoshop/drive_c/launcher.sh
-echo 'WINEPREFIX='$1'/Adobe-Photoshop DXVK_LOG_PATH='$1'/Adobe-Photoshop DXVK_STATE_CACHE_PATH='$1'/Adobe-Photoshop wine64 ' $1'/Adobe-Photoshop/drive_c/Program\ Files/Adobe/Adobe\ Photoshop\ 2021/photoshop.exe $FILE_PATH' >> $1/Adobe-Photoshop/drive_c/launcher.sh
+echo 'WINEPREFIX='$1'/Adobe-Photoshop DXVK_LOG_PATH='$1'/Adobe-Photoshop DXVK_STATE_CACHE_PATH='$1'/Adobe-Photoshop /home/nix/ps/usr/bin/wine64 ' $1'/Adobe-Photoshop/drive_c/Program\ Files/Adobe/Adobe\ Photoshop\ 2021/photoshop.exe $FILE_PATH' >> $1/Adobe-Photoshop/drive_c/launcher.sh
 
 chmod +x $1/Adobe-Photoshop/drive_c/launcher.sh
 
-WINEPREFIX=$1/Adobe-Photoshop winecfg -v win10
+WINEPREFIX=$1/Adobe-Photoshop /home/nix/ps/usr/bin/winecfg -v win10
 
 
 cp allredist/photoshop.png ~/.local/share/icons/photoshop.png
@@ -109,12 +103,12 @@ echo 'StartupWMClass=photoshop.exe' >> ~/.local/share/applications/photoshop.des
 #rm -rf winetricks
 
 
-rm -rf $1/progress.mimifile
-touch $1/progress.mimifile
-echo "95" >> $1/progress.mimifile
+#rm -rf $1/progress.mimifile
+#touch $1/progress.mimifile
+#echo "95" >> $1/progress.mimifile
 
-curl -L "https://download.adobe.com/pub/adobe/photoshop/cameraraw/win/12.x/CameraRaw_12_2_1.exe" > CameraRaw_12_2_1.exe 
-WINEPREFIX=$1/Adobe-Photoshop wine CameraRaw_12_2_1.exe
+#curl -L "https://download.adobe.com/pub/adobe/photoshop/cameraraw/win/12.x/CameraRaw_12_2_1.exe" > CameraRaw_12_2_1.exe 
+#WINEPREFIX=$1/Adobe-Photoshop wine CameraRaw_12_2_1.exe
 #rm -rf CameraRaw_12_2_1.exe
 
 rm -rf $1/progress.mimifile
