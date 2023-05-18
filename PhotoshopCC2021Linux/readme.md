@@ -27,3 +27,9 @@ Go to edit>preferences>performances, under "detected graphics processor" you sho
 ### Changed winetricks lines:
 - 5362
 - 5367
+
+To not destroy my github language usage stats, the file's been deleted from here.
+
+Get it [from the commit history](https://github.com/Nixuge/RandomScripts/blob/d034032cb04bfe005d23af4dc6b67b791c5a6493/PhotoshopCC2021Linux/winetricks)
+
+Or from pastebin: login to Google, then combine https://pastebin.com/Fwra1XRa and https://pastebin.com/194AcvUA
