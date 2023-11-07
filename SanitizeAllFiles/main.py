@@ -22,7 +22,7 @@ def run_folder(path: str):
             print(f"Renamed file {file} to {new_filename}")
             shutil.move(f"{path}/{file}", f"{path}/{new_filename}")
         
-        if RECURSIVE and os.path.isdir(new_filename):
+        if RECURSIVE and os.path.isdir(f"{path}/{new_filename}"):
             run_folder(f"{path}/{new_filename}")
 
 if __name__ == "__main__":
